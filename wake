@@ -1,0 +1,11 @@
+#!/bin/bash
+
+WAKE='/usr/local/bin/wakeonlan'
+NAMESFILE="$HOME/.wakenames"
+
+TARGET=$1
+
+[[ -e $NAMESFILE ]] && NAMES=$(cat $NAMESFILE)
+[[ -n $TARGET ]] && MAC=$(echo "$NAMES" | grep $TARGET | awk '{ print $NF }')
+
+$WAKE $MAC
